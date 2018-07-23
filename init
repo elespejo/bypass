@@ -1,0 +1,78 @@
+#!/bin/bash
+WHITE_DIR=/bypass
+
+# create or update a ipset with iplist file
+UPDATE-IPSET() {
+	ipset=$1
+
+	if [ -f $ipset ] && [ -s $ipset ]; then
+		echo "update $ipset list start ..."
+		ipset create -exist $ipset hash:net
+		ipset flush $ipset
+
+		while read ip; do
+		  ipset -q add $ipset $ip 
+		done < $ipset
+
+		echo "update $ipset list ... done"
+	fi
+}
+
+UPDATE-ALL-IPSETS() {
+  for conf in $WHITE_DIR/*
+  do
+    echo "$conf"
+    UPDATE-IPSET $conf
+  done
+}
+
+
+
+# create iptables CHAIN BYPASS
+CREATE-CHAIN() {
+	## create chain BYPASS
+	iptables -t nat -N BYPASS
+	iptables -t nat -I PREROUTING -p tcp -i $LAN -j BYPASS
+}
+
+# add default white list
+APPEND-RULE-WHITELIST() {
+  for conf in $WHITE_DIR/*
+  do
+    if [ -f $conf ] && [ -s $conf ]; then
+      iptables -t nat -A BYPASS -p tcp --match set --match-set "$conf" dst -j RETURN
+    fi
+  done
+}
+
+# redirect all other packets to `DEFAULT_PORT`, set by docker environment variable
+APPEND-RULE-REDIRECT() {
+        iptables -t nat -A BYPASS -p tcp -m statistic --mode random --probability .25 -j REDIRECT --to $PORT_1
+        iptables -t nat -A BYPASS -p tcp -m statistic --mode random --probability .33 -j REDIRECT --to $PORT_2
+        iptables -t nat -A BYPASS -p tcp -m statistic --mode random --probability .5 -j REDIRECT --to $PORT_3
+        iptables -t nat -A BYPASS -p tcp -m statistic --mode random --probability 1 -j REDIRECT --to $PORT_4
+
+}
+
+
+INIT() {
+	./clean-rule $LAN
+	./clean-ipset
+
+	# update ips in ipset
+	UPDATE-ALL-IPSETS
+
+	# create new CHAIN
+	CREATE-CHAIN
+
+  # append dafault whitelist rule
+	APPEND-RULE-WHITELIST
+
+	# append default redirect rule
+	APPEND-RULE-REDIRECT
+
+	# check all rules
+	iptables -t nat -L -vn
+}
+
+INIT && bash

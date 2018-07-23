@@ -1,0 +1,7 @@
+#!/bin/bash
+for conf in /bypass/*
+do
+  echo "Cleaning $conf ..."
+  ipset destroy $conf
+  echo "Finish cleaning $conf"
+done
