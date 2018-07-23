@@ -10,13 +10,13 @@ git clone https://github.com/meninasx86/bypass-x86.git
 
 * Modify config by adding vps in `02-vps`
 ```
-cd bypass
+cd bypass-x86
 vim white/02-vps
 ```
 
 * Run bypass
 ```
-./bypass-control start eth1
+./bypass-x86-control start eth1
 ```
 
 * clean rule
