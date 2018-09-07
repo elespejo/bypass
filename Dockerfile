@@ -2,7 +2,7 @@ FROM alpine
 
 RUN apk update && \
     apk upgrade && \
-    apk add --update bash iptables ipset && \
+    apk add --update bash iptables ipset bc && \
     rm -rf /var/cache/apk/*
 
 RUN mkdir /bypass

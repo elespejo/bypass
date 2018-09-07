@@ -1,0 +1,1 @@
+docker build -t meninasx86/bypass-x86:test .

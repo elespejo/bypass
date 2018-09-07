@@ -47,11 +47,12 @@ APPEND-RULE-WHITELIST() {
 
 # redirect all other packets to `DEFAULT_PORT`, set by docker environment variable
 APPEND-RULE-REDIRECT() {
-        iptables -t nat -A BYPASS -p tcp -m statistic --mode random --probability .25 -j REDIRECT --to $PORT_1
-        iptables -t nat -A BYPASS -p tcp -m statistic --mode random --probability .33 -j REDIRECT --to $PORT_2
-        iptables -t nat -A BYPASS -p tcp -m statistic --mode random --probability .5 -j REDIRECT --to $PORT_3
-        iptables -t nat -A BYPASS -p tcp -m statistic --mode random --probability 1 -j REDIRECT --to $PORT_4
-
+  for (( i=0; i<$BALANCE_NUM; i++ )) 
+  do
+    val=$(echo "1/($BALANCE_NUM-$i)"|bc -l)
+    port=$(echo "$BASE_PORT+10*$i"|bc -l)
+    iptables -t nat -A BYPASS -p tcp -m statistic --mode random --probability $val -j REDIRECT --to $port 
+  done 
 }
 
 
