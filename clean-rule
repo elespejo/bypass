@@ -1,11 +1,6 @@
 #!/bin/bash
-if [ "$1" = "" ]; then
-	echo "Clean needs LAN interface name."
-else
-	echo "clean start ..."
-	LAN=$1
-	iptables -t nat -D PREROUTING -p tcp -i $LAN -j BYPASS
-	iptables -t nat -F BYPASS
-	iptables -t nat -X BYPASS
-	echo "clean ... done"
-fi
+echo "clean start ..."
+iptables -t nat -D PREROUTING -p tcp -i $LAN -j BYPASS
+iptables -t nat -F BYPASS
+iptables -t nat -X BYPASS
+echo "clean ... done"

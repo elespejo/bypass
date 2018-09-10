@@ -29,12 +29,11 @@ START() {
 }
 
 STOP() {
-    if [ "$#" -ne 1 ]; then
+    if [ "$#" -ne 0 ]; then
         Usage
     fi
-    lan=$1 
 
-    docker exec -it ${container} ./clean-rule $lan
+    docker exec -it ${container} ./clean-rule
     docker exec -it ${container} ./clean-ipset
     docker rm -f ${container}
 }
@@ -51,15 +50,18 @@ else
     case "$1" in
         start)
             START $2 $3 $4
+            sleep 5
             STATUS
             ;;
         stop)
-            STOP $2
+            STOP
+            sleep 5
             STATUS
             ;;
         restart)
-            STOP $2
+            STOP
             START $2 $3 $4
+            sleep 5
             STATUS
             ;;
         status)
