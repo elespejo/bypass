@@ -1,1 +1,2 @@
-docker build -t meninasx86/bypass-x86:test .
+#! /bin/bash
+docker build -t elespejo/bypass-$1 -f ./Dockerfile-$1 .

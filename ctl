@@ -1,7 +1,7 @@
 #!/bin/bash
 filename="$0"
-image="meninasx86/bypass-x86"
-version="test"
+image="elespejo/bypass-x86"
+version="latest"
 conf_vol=`pwd`/conf
 container=bypass_router
 
@@ -12,8 +12,9 @@ Usage() {
     echo "  stop    stop  service"
     echo "  status  display the status of service"
     echo "attribute options:"
-    echo "  iface   interface of wan"
-    echo "  port(range) port or port range of dns service    "
+    echo "  iface   interface of lan"
+    echo "  balancenum    number of redirect ports"
+    echo "  baseport    starting port num, increased by 10"
     exit 1
 }
 
