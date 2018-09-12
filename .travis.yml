@@ -15,20 +15,23 @@ branches:
   - master
   - develop
   - "/^\\d+\\.\\d+(\\.\\d+)?(-\\S*)?$/"
-
 before_install:
   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
 install: true
-script:
-  - ./build $ARCH
-deploy:
-  - provider: script
-    script: bash deploy.sh $DOCKER_USER $DOCKER_PASS $ARCH $TRAVIS_BRANCH 
-    on:
-      all_branches: true
-      condition: $TRAVIS_BRANCH =~ ^master|develop$
-  - provider: script
-    script: bash deploy.sh $DOCKER_USER $DOCKER_PASS $ARCH $TRAVIS_TAG 
-    on:
-      tags: true
-      all_branches: true
+
+jobs:
+  include:
+    - stage: build docker images 
+      script: ./build $ARCH
+    - stage: push to docker hub
+      deploy:
+        - provider: script
+          script: bash deploy.sh $DOCKER_USER $DOCKER_PASS $ARCH $TRAVIS_BRANCH 
+          on:
+            all_branches: true
+            condition: $TRAVIS_BRANCH =~ ^master|develop$
+        - provider: script
+          script: bash deploy.sh $DOCKER_USER $DOCKER_PASS $ARCH $TRAVIS_TAG 
+          on:
+            tags: true
+            all_branches: true
