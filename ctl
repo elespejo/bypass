@@ -1,7 +1,7 @@
 #!/bin/bash
 filename="$0"
-image="elespejo/bypass-x86"
-version="latest"
+image="elespejo/bypass-$5"
+version="develop"
 conf_vol=`pwd`/conf
 container=bypass_router
 
@@ -19,7 +19,7 @@ Usage() {
 }
 
 START() {
-    if [ "$#" -ne 3 ]; then
+    if [ "$#" -ne 4 ]; then
         Usage
     fi
     lan=$1 
@@ -50,7 +50,7 @@ if [ "$#" -lt 1 ]; then
 else
     case "$1" in
         start)
-            START $2 $3 $4
+            START $2 $3 $4 $5
             sleep 5
             STATUS
             ;;
@@ -61,7 +61,7 @@ else
             ;;
         restart)
             STOP
-            START $2 $3 $4
+            START $2 $3 $4 $5
             sleep 5
             STATUS
             ;;
