@@ -1,4 +1,22 @@
-# bypass
+
+<p align="center">
+  <img src="https://www.lucidchart.com/publicSegments/view/e989f28a-2be0-4032-b578-8e0e05b3e7b7/image.png">
+</p>
+
+<h1 align="center"> bypass </h1>
+<p align="center">
+  <b > route packets using iptables </b>
+</p>
+<br>
+
+![Travis (.org) branch](https://img.shields.io/travis/elespejo/bypass/master.svg)
+![GitHub](https://img.shields.io/github/license/elespejo/bypass.svg)
+
+`   armv6:   `
+[![Docker Pulls](https://img.shields.io/docker/pulls/elespejo/bypass-armv6.svg)](https://hub.docker.com/r/elespejo/bypass-armv6/tags/)
+
+`   x86:    `
+[![Docker Pulls](https://img.shields.io/docker/pulls/elespejo/bypass-x86.svg)](https://hub.docker.com/r/elespejo/bypass-x86/tags/)
 
 * It uses iptables to redirect packets input from an interface(eth1) to local port.
 * It builds 2 docker images, `elespejo/bypass-x86` and `elespejo/bypass-rpi`, which are hosted in docker hub.
