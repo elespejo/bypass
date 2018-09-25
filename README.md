@@ -24,40 +24,37 @@
 
 # Deployment ( for end user)
 
-### Through script
+### Through docker-compose
 
 * Fetch the code
   ```
-  git clone https://github.com/elespejo/bypass.git
+  $ git clone https://github.com/elespejo/bypass.git
   ```
 
 * Modify config by adding vps in `02-vps`
   ```
-  cd bypass-x86
-  vim conf/02-vps
+  $ cd bypass/test
+  $ vim conf/02-vps
+  ```
+
+* Modify the architecture and version
+  ```
+  $ vim .env
   ```
 
 * Run bypass
   ```
-  ./ctl start <iface> <balance num> <base port> <arch>
-  ```
-
-  ```
-  ./ctl start eth1 4 1020 x86
-  ```
-
-  ```
-  ./ctl start eth1 4 1020 armv6
+  $ docker-compose up -d 
   ```
 
 * Check the status
   ```
-  ./ctl status
+  $ ./check_status.sh
   ```
 
 * Restart bypass service
   ```
-  ./ctl restart <iface> <balance num> <bypass port> <arch>
+  $ docker-compose up -d --force-recreate
   ```
 
 
@@ -65,13 +62,13 @@
 
 * Start bypass
   ```
-  docker run -itd --cap-add=NET_ADMIN --network=host --privileged --name=router_bypass -v ${conf_vol}:/bypass -e LAN=${lan} -e BALANCE_NUM=${balance_num} -e BASE_PORT=${base_port} elespejo/bypass-x86:develop
+  $ docker run -itd --cap-add=NET_ADMIN --network=host --privileged --name=router_bypass -v ${conf_vol}:/bypass -e LAN=${lan} -e BALANCE_NUM=${balance_num} -e BASE_PORT=${base_port} elespejo/bypass-x86:test
   ``` 
 
   or if running on `armv6`
 
   ```
-  docker run -itd --cap-add=NET_ADMIN --network=host --privileged --name=router_bypass -v ${conf_vol}:/bypass -e LAN=${lan} -e BALANCE_NUM=${balance_num} -e BASE_PORT=${base_port} elespejo/bypass-armv6:develop
+  $ docker run -itd --cap-add=NET_ADMIN --network=host --privileged --name=router_bypass -v ${conf_vol}:/bypass -e LAN=${lan} -e BALANCE_NUM=${balance_num} -e BASE_PORT=${base_port} elespejo/bypass-armv6:test
   ``` 
   in which, 
 
@@ -83,12 +80,21 @@
 * Stop bypass
   * Clean rule
     ```
-    docker exec -it router_bypass ./clean-rule 
+    $ docker-compose exec router_bypass ./clean-rule 
     ```
 
   * Clean ipset
     ```
-    docker exec -it router_bypass ./clean-ipset
+    $ docker-compose exec router_bypass ./clean-ipset
+    ```
+
+  * Stop compose or container
+    ```
+    $ docker-compose down
+    ```
+    or 
+    ```
+    $ docker rm -f router_bypass
     ```
 
 # Getting Started ( for developer )
@@ -103,13 +109,12 @@ These instructions will get you a copy of the project up and running on your loc
 ### Local Build
 
 ```
-./build <arch>
+$ make build
 ```
 
 ### Built With Travis CI
 
 * `.travis.yml` for build configuration
-* `set_docker_account` and `.env` is for create docker credential
 
 # Logistics
 
@@ -125,6 +130,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 ### Authors
 
 * **mateomartin1998** - *Initial work* - [elespejo](https://github.com/mateomartin)
+* **Valerio-Perez** - *Organize* - [Valerio-Perez](https://github.com/Valerio-Perez)
 
 See also the list of [contributors](https://github.com/elespejo/bypass/graphs/contributors) who participated in this project.
 
