@@ -38,10 +38,9 @@ deploy:
     script: make deploy -e USER=$DOCKER_USER -e PASS=$DOCKER_PASS -e ARCH=$ARCH -e TAG=$DEV_VER
     on:
       branch: develop
-      all_branches: true
 
   - provider: script
     script: make deploy -e USER=$DOCKER_USER -e PASS=$DOCKER_PASS -e ARCH=$ARCH -e TAG=$TRAVIS_TAG
     on:
-      tag: true
+      tags: true
       all_branches: true
