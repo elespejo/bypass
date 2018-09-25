@@ -1,32 +1,47 @@
 language: generic
+
 sudo: required
 dist: trusty
+
 env:
   matrix:
     - ARCH=armv6
     - ARCH=x86
   global:
+    - MASTER_VER=latest DEV_VER=test
     - secure: sVGA62ZJvvya9yPs8knEDhC0QPVuIblaiQzEtaI/N+2HlXzaOuglfrCxHg91aOZZoX1vQ9tteDFc9DvUQTvfj3THnOdjRlPBB1uLD/Kr+t60wfPbM5/Wcn9fT/BtdRoFelPasvnnOiu+6ff8P7hJ9rAoXhKq2usAMX7PfZDNtc5mMWsPUMhBGaglV09DyNgk14NnJn501bZ44RbFcjzWjrqbkbRwJkOTycJODxKjAEfcOo2KB3/RF/js9J1vwgQHm7AJqQIkpZolujmY6u6NEZToXgIFnub89QDzaEBrAscjEiI8kfcTZU44/3nYomuX5IMxSpf8DuDro84plL3NPBtAhZFWXwdHPNqX5ZzKxyl2PKER2UV9wcftbuBenKbSiGxWoxdtSS+/e+0HI+TbTa0Vhf+HhAUKBwWFRwSv7OFwFCcj22/Ats/DDqSxVcLGVpkEjN8ZmVXR5r5PG0+0dIGB6Hgxq0GQHVqwcUBn1/TTsoOffz7TMEcXJvgciJiyBIZSrWjPfjVNuGx2rZ/vQwIe44Vo490uoil6uYAZzH2dm2t4Rk0G6ZT4eSEX4gE0DnP6CeEqAzL0XtGuwlG6+QmCqjsB+lhHWkYn1lATZlRNaBKVP7hvQA/5/RcWQxWXL7CIgjrha77cJpscxLxS4FsRMqPMYjvHqPQrrgCa870=
     - secure: UjZHjAXPJuvi8HryWO+O7zK1ta4zs9FGQitnEn6oqT5U3p8wsIBVGQRa9V8GsOjMcBHFfQH7Zdi+t3Ln8XgRVUTBjE5iO5IVi7vGCj+TVpdf8XLCuGkMKa18ZjEb43yNOWnNkxoTddKGXXbmPsJsSg1pVK+ydCOPn85kdYksA2Pjjqlg9A4THXU/5RZVT/esGSSP3r3jEqnbfYUs9G11BQsvLD1RURI0zmptQEf2h8OzPU5JlX9WnqAA6eR5RbiC/jbFqy0TrYur68pL9njJHF0PTU341qbYmuu5zqR+tb3jxePj0w3E/iT92f3NvLlL6m1QKzxOmyq9xwF0BgQ1IcrmWw+kXJbLqoteFFVhrZyHXlQ1QjVxDeqEKcPf4fK7shtTRgLhOusqc77443EQ7BqOrd+ss4OM38NH8OP6wELNUESx0n6eS11/0KkmqhmawZLldNHNDAGep76S4Yalnmr8lwtH6yMGr6GBURrx2zUzV9wTLF5K6HKvmUQuOMp3d7DGXDwDUtBqnpPGr/rWER1uuD2B/+g4YFY2mZ+bF8WS4Z8EA1cwDduDYX52+tQhDbmYAAMvjlp5yCPx4BW+GSpz6imRxDESSB0IqcFzJjO2vrYMKV8IihvojYgoWdupd2A5oDory7/LPdxU6NaWOc9p+Uy0bXcOdUAYYxGrbgw=
-services:
-  - docker
+
 branches:
   only:
     - master
     - develop
     - "/^\\d+\\.\\d+(\\.\\d+)?(-\\S*)?$/"
+
+services:
+  - docker
+
 before_install:
   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+
 install: true
-script: "./build $ARCH"
+
+script: "make build -e ARCH=$ARCH"
+
 deploy:
   - provider: script
-    script: bash deploy.sh $DOCKER_USER $DOCKER_PASS $ARCH $TRAVIS_BRANCH
+    script: make deploy -e USER=$DOCKER_USER -e PASS=$DOCKER_PASS -e ARCH=$ARCH -e TAG=$MASTER_VER
     on:
-      all_branches: true
-      condition: "$TRAVIS_BRANCH =~ ^master|develop$"
+      branch: master
+
   - provider: script
-    script: bash deploy.sh $DOCKER_USER $DOCKER_PASS $ARCH $TRAVIS_TAG
+    script: make deploy -e USER=$DOCKER_USER -e PASS=$DOCKER_PASS -e ARCH=$ARCH -e TAG=$DEV_VER
     on:
-      tags: true
+      branch: develop
+      all_branches: true
+
+  - provider: script
+    script: make deploy -e USER=$DOCKER_USER -e PASS=$DOCKER_PASS -e ARCH=$ARCH -e TAG=$TRAVIS_TAG
+    on:
+      tag: true
       all_branches: true
