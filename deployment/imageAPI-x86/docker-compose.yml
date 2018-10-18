@@ -1,6 +1,22 @@
-version: ''
-services:
-  service_name:
+version: '3.2'
+services: 
+  router_bypass:
     image: ${OWNER}/${REPO}-${ARCH}:${VERSION}
+    restart: always
 
-    command: 
+    network_mode: 'host'
+    
+    cap_add: 
+      - 'NET_ADMIN'
+
+    environment: 
+      - LAN=${LAN}
+      - BASE_PORT=${BASE_PORT}
+      - BALANCE_NUM=${BALANCE_NUM}
+
+    volumes: 
+      - type: bind
+        source: ${CONFIG_DIR}
+        target: /bypass
+
+    stdin_open: true
