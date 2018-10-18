@@ -1,3 +1,16 @@
 FROM elespejo/armv6-x86-alpine-base 
 
-CMD /bin/bash
+MAINTAINER Mateo.Martin <Mateo.Martin@protonmail.com>
+
+
+RUN apk update && \
+    apk upgrade && \
+    apk add --update bash curl iptables ipset bc && \
+    rm -rf /var/cache/apk/*
+
+RUN mkdir /bypass
+ADD init ./
+ADD clean-rule ./
+ADD clean-ipset ./
+
+ENTRYPOINT ./init
