@@ -26,6 +26,13 @@ clean-image:
 
 DEPLOYMENT_x86=$(DEPLOYMENT)/imageAPI-x86
 DEPLOYMENT_armv6=$(DEPLOYMENT)/imageAPI-armv6
+CONF_GEN=$(DEPLOYMENT)/confgenerator
+
+mk-confgenerator: $(CONF_GEN)
+	mkdir $(REPO)-confgenerator
+	cp -r $(CONF_GEN)/* $(REPO)-confgenerator
+	zip -r $(REPO)-confgenerator-$(VERSION).zip $(REPO)-confgenerator
+	rm -rf $(REPO)-confgenerator
 
 mk-deployment-x86: $(DEPLOYMENT_x86)
 	mkdir $(REPO)-imageAPI-x86
@@ -41,7 +48,7 @@ mk-deployment-armv6: $(DEPLOYMENT_armv6)
 	zip -r $(REPO)-armv6-$(VERSION).zip $(REPO)-imageAPI-armv6
 	rm -rf $(REPO)-imageAPI-armv6
 
-mk-deployment: mk-deployment-x86 mk-deployment-armv6
+mk-deployment: mk-deployment-x86 mk-deployment-armv6 mk-confgenerator
 
 clean-deployment: $(REPO)-$(VERSION).zip
 	rm $(REPO)-$(VERSION).zip
