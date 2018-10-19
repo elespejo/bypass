@@ -28,18 +28,18 @@ unzip bypass-confgenerator-0.3.7.zip
 
 ```bash
 cd confgenerator
-./gen-vps.sh [NAME] [IP]...
+./gen-vps.sh [IP]...
 ```
 in which,
-* [NAME]: The file name
 * [IP]: The ips that add to the file  
 
 e.g, generate bypass configuration
 ```bash
-./gen-vps.sh 02-vps 123.45.67.89/32 
+./gen-vps.sh 123.45.67.89 123.123.123.123
 ``` 
 
 You can validate the result by `cat 02-vps`, with successful output similar with the following,
 ```
 123.45.67.89/32
+123.123.123.123/32
 ```
