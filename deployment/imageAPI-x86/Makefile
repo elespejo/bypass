@@ -5,10 +5,8 @@ ENV=$(CURDIR)/.env
 .PHONY: config
 config:
 	cp $(ENV_TEMP) $(ENV)
-	echo "LAN=$(LAN)" >> $(ENV)
-	echo "BASE_PORT=$(BASE_PORT)" >> $(ENV)
-	echo "BALANCE_NUM=$(NUM)" >>$(ENV)
-	echo "CONFIG_DIR=$(CONF)" >>$(ENV)
+	cat $(CONFIG)/bypass-config.env >> $(ENV)
+	echo "CONFIG_DIR=$(CONFIG)/bypass_conf" >> $(ENV)
 	cat $(ENV)
 	mkdir -p $(COMP_DIR)
 	docker-compose -p $(NAME) -f $(CURDIR)/docker-compose.yml config | tee $(COMP_DIR)/$(NAME).yml
