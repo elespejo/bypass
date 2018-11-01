@@ -1,0 +1,15 @@
+config:
+  lan: br0
+  base_port: 2010
+  number: 16
+  
+white:
+  - filename: 03-vps
+    content:
+    - ip/net
+    - ip/net
+
+  - filename: 04-test
+    content:
+    - ip/net
+    - ip/net
