@@ -18,7 +18,7 @@ class Gen_config():
         f = open(self.path+'/bypass-config.env', 'w')
         f.write("LAN=%s\n" % self.lan)
         f.write("BASE_PORT=%s\n" % self.base_port)
-        f.write("BALANCE_NUMBER=%s\n" % self.number)
+        f.write("BALANCE_NUM=%s\n" % self.number)
         f.close
 
 class Gen_white():
