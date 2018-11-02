@@ -14,9 +14,9 @@ wget https://github.com/elespejo/bypass/releases/download/[VERSION]/bypass-[ARCH
   * VERSION : the release tag  
   * ARCH : the architecture of your machine 
 
-  e.g : Deploy a bypass on a x86 machine with the release 0.3.5 by executing
+  e.g : Deploy a bypass on a x86 machine with the release 0.4.1 by executing
   ```bash
-  wget https://github.com/elespejo/bypass/releases/download/0.3.5/bypass-x86-0.3.5.zip
+  wget https://github.com/elespejo/bypass/releases/download/0.4.1/bypass-x86-0.4.1.zip
   ```
 
 ### Unzip
@@ -28,21 +28,18 @@ cd bypass-imageAPI-[ARCH]
 
 ### Generate the docker compose file
 
-Docker compose file is used for bypass deployment. Its generation requires five parameters:
-* [LAN] : The LAN interface of your machine
-* [BASE_PORT] : The start port of redirect port
-* [NUMBER] : The number of redirect port
-* [CONF_PATH] : The absolute path to configuration directory.  
-* [COMP_NAME] : The name of this compose file. This name is used to control the service. Must be **uniqueness**.
+Docker compose file is used for bypass deployment. Its generation requires two parameters:
+* [CONF_PATH]: The absolute path to configuration directory.  
+* [COMP_NAME]: The name of docker compose file you are going to be generated.
 
 ```bash
-make config LAN=[LAN] BASE_PORT=[BASE_PORT] NUM=[NUMBER] CONF=[CONF_PATH] NAME=[COMP_NAME]
+make config CONFIG=[CONF_PATH] NAME=[COMP_NAME]
 ```
 
-e.g : Generate a compose file named `bypass.yml` with the configuration in `~/bypass_conf/` and redirect port is `2010`, `2020`, `2030`, `2040`.
+e.g : Generate a compose file named `bypass.yml` with the configuration in `~/bypass-conf/`.
 ```bash
 cd ~/bypass-imageAPI-x86/
-make config LAN=br0 BASE_PORT=2010 NUM=4 CONF=~/bypass_conf/ NAME=bypass
+make config CONFIG=~/bypass-conf/ NAME=bypass
 ```
 Therefore a compose file named `bypass.yml` is generated in `~/bypass-imageAPI-x86/compose/`.
 ```yaml
@@ -52,10 +49,10 @@ services:
     cap_add:
     - NET_ADMIN
     environment:
-      BALANCE_NUM: '4'
+      BALANCE_NUM: '16'
       BASE_PORT: '2010'
       LAN: br0
-    image: elespejo/bypass-x86:0.3.5
+    image: elespejo/bypass-x86:0.4.1
     network_mode: host
     restart: always
     stdin_open: true
@@ -79,10 +76,10 @@ make start NAME=bypass
 After starting the service successfully, you may see the output similar with the following: 
 ```
 docker-compose -p bypass -f ~/bypass-imageAPI-x86/compose/bypass.yml up -d
-Pulling router_bypass (elespejo/bypass-x86:0.3.5)...
-0.3.5: Pulling from elespejo/bypass-x86
+Pulling router_bypass (elespejo/bypass-x86:0.4.1)...
+0.4.1: Pulling from elespejo/bypass-x86
 ...
-Status: Downloaded newer image for elespejo/bypass-x86:0.3.5
+Status: Downloaded newer image for elespejo/bypass-x86:0.4.1
 Creating bypass_router_bypass_1 ... done
 ```
 
@@ -106,7 +103,7 @@ make status NAME=[COMP_NAME]
 ```
 e.g,
 ```bash
-make stop NAME=bypass
+make status NAME=bypass
 ```
 You may see the output similar with the following:
 ```
