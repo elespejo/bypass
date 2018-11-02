@@ -64,17 +64,6 @@ class bypass_confgen_cli():
         self._gen_config()
         self._gen_white()
 
-        
-
-
-        #os.makedirs(path+'/bypass_conf')
-        #copy(pwd+'/01-inner', path+'/bypass_conf')
-        #copy(pwd+'/02-cn', path+'/bypass_conf')
-
-        #info_dict = yaml.load(open(info, 'r'))
-        #for key, val in info_dict.items():
-        #    generator = getattr(gen, 'Gen_'+key)
-        #    generator.
 
 if __name__ == '__main__':
     CLI = bypass_confgen_cli(gen)
