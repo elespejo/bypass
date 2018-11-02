@@ -222,8 +222,8 @@
 <li><p>From command line:  </p>
 <pre><code class="lang-bash">  wget https://github.com/elespejo/bypass/releases/download/[VERSION]/bypass-confgenerator-[VERSION].zip
 </code></pre>
-<p>  e.g, download configuration generator of version 0.3.7</p>
-<pre><code class="lang-bash">  wget https://github.com/elespejo/bypass/releases/download/0.3.7/bypass-confgenerator-0.3.7.zip
+<p>  e.g, download configuration generator of version 0.4.1</p>
+<pre><code class="lang-bash">  wget https://github.com/elespejo/bypass/releases/download/0.4.1/bypass-confgenerator-0.4.1.zip
 </code></pre>
 </li>
 </ul>
@@ -231,23 +231,72 @@
 <pre><code class="lang-bash">unzip bypass-confgenerator-[VERSION].zip
 </code></pre>
 <p>e.g,</p>
-<pre><code class="lang-bash">unzip bypass-confgenerator-0.3.7.zip
+<pre><code class="lang-bash">unzip bypass-confgenerator-0.4.1.zip
 </code></pre>
-<h3 id="generate-configuration">Generate configuration</h3>
-<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> confgenerator
-./gen-vps.sh [IP]...
+<h3 id="create-bypass-conf-info">Create bypass conf-info</h3>
+<h5 id="to-create-bypass-conf-info-you-can-refer-to-template-bypass-infoyml">To create bypass conf-info, you can refer to template <code>bypass-info.yml</code></h5>
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> bypass-confgenerator
+vi bypass-info.yml
+config:
+  lan: br0 
+  base_port: 2010
+  number: 16
+
+white:
+  - filename: 03-vps
+    content:
+    - ip/net
+    - ip/net
+
+  - filename: 04-test
+    content:
+    - ip/net
+    - ip/net
 </code></pre>
-<p>in which,</p>
+<h5 id="explanation-of-bypass-infoyml">Explanation of <code>bypass-info.yml</code></h5>
 <ul>
-<li>[IP]: The ips that add to the file  </li>
+<li>[br0]: ethernet interface name for lan</li>
+<li>[2010]: first port used by bypass</li>
+<li>[16]: number of ports</li>
+<li>[03-vps] or [04-test]: filename of while list</li>
+<li>[ip/net]: ip/netmask in white list, e.g, <code>123.123.123.0/24</code> or <code>123.123.123.123/32</code>, there can be more than one ip/net list in content</li>
 </ul>
-<p>e.g, generate bypass configuration</p>
-<pre><code class="lang-bash">./gen-vps.sh 123.45.67.89 123.123.123.123
+<h3 id="generate-configuration">Generate configuration</h3>
+<ul>
+<li><p>Check usage of bypass-confgenerator</p>
+<pre><code class="lang-bash">python -m bypass_confgenerator.cli -h
 </code></pre>
-<p>You can validate the result by <code>cat 02-vps</code>, with successful output similar with the following,</p>
-<pre><code>123.45.67.89/32
-123.123.123.123/32
+</li>
+<li><p>Generate configuration</p>
+<pre><code class="lang-bash">python -m bypass_confgenerator.cli [conf-info] <span class="hljs-_">-d</span> [destination]
 </code></pre>
+<p>e.g,</p>
+<pre><code class="lang-bash">python -m bypass_confgenerator.cli ~/bypass-confgenerator/bypass-info.yml <span class="hljs-_">-d</span> ~/bypass-conf
+</code></pre>
+</li>
+</ul>
+<h3 id="check-configuration">Check configuration</h3>
+<pre><code class="lang-bash">tree [destination]
+</code></pre>
+<p>e.g,</p>
+<pre><code class="lang-bash">tree ~/bypass-conf
+bypass-conf
+&#x251C;&#x2500;&#x2500; bypass-config.env
+&#x2514;&#x2500;&#x2500; bypass_conf
+    &#x251C;&#x2500;&#x2500; 01-inner
+    &#x251C;&#x2500;&#x2500; 02-cn
+    &#x251C;&#x2500;&#x2500; 03-vps
+    &#x2514;&#x2500;&#x2500; 04-test
+</code></pre>
+<p>Explanation of each file in bypass-conf</p>
+<ul>
+<li><code>bypass-config.env</code>: define enviroment variable for docker compose file </li>
+<li><code>bypass_conf/01-inner</code>: default white list of cn</li>
+<li><code>bypass_conf/02-cn</code> default white list for local network</li>
+<li><code>bypass_conf/03-vps</code>: user defined white list, usually it contains the IP of vps </li>
+<li><code>bypass_conf/04-test</code>: user defined white list </li>
+</ul>
+
                                 
                                 </section>
                             
@@ -290,7 +339,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Generate configuration","level":"3.1","depth":1,"next":{"title":"Deployment","level":"3.2","depth":1,"path":"usage/DEPLOY.md","ref":"usage/DEPLOY.md","articles":[]},"previous":{"title":"Dependency","level":"2.2","depth":1,"path":"usage/DEPENDENCY.md","ref":"usage/DEPENDENCY.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"usage/GENCONF.md","mtime":"2018-10-19T07:20:57.462Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-10-19T07:21:34.427Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Generate configuration","level":"3.1","depth":1,"next":{"title":"Deployment","level":"3.2","depth":1,"path":"usage/DEPLOY.md","ref":"usage/DEPLOY.md","articles":[]},"previous":{"title":"Dependency","level":"2.2","depth":1,"path":"usage/DEPENDENCY.md","ref":"usage/DEPENDENCY.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"usage/GENCONF.md","mtime":"2018-11-02T06:39:36.844Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-02T06:40:52.001Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
