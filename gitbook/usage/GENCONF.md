@@ -58,16 +58,16 @@ white:
 
 * Check usage of bypass-confgenerator
 ```bash
-python -m bypass_confgenerator.cli -h
+python -m confgenerator.cli -h
 ```
 
 * Generate configuration
 ```bash
-python -m bypass_confgenerator.cli [conf-info] -d [destination]
+python -m confgenerator.cli [conf-info] -d [destination]
 ```
 e.g,
 ```bash
-python -m bypass_confgenerator.cli ~/bypass-confgenerator/bypass-info.yml -d ~/bypass-conf
+python -m confgenerator.cli ~/bypass-confgenerator/bypass-info.yml -d ~/bypass-conf
 ```
 
 ### Check configuration
