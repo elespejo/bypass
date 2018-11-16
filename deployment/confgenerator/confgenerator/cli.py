@@ -48,7 +48,7 @@ class bypass_confgen_cli():
 
     def _gen_white(self):
         """Generate white list."""
-        white_dir = self.path+'/bypass_conf'
+        white_dir = self.path+'/conf'
         os.makedirs(white_dir)
         copy(PKG_DIR+'/confgenerator/01-inner', white_dir)
         copy(PKG_DIR+'/confgenerator/02-cn', white_dir)

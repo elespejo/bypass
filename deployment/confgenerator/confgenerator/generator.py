@@ -15,7 +15,7 @@ class Gen_config():
 
     def write(self):
         """Write env config to file."""
-        f = open(self.path+'/bypass-config.env', 'w')
+        f = open(self.path+'/config.env', 'w')
         f.write("LAN=%s\n" % self.lan)
         f.write("BASE_PORT=%s\n" % self.base_port)
         f.write("BALANCE_NUM=%s\n" % self.number)
