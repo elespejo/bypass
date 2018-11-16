@@ -10,9 +10,9 @@ You can download the generator package from web page or command line.
     ```bash
     wget https://github.com/elespejo/bypass/releases/download/[VERSION]/bypass-confgenerator-[VERSION].zip
     ```
-    e.g, download configuration generator of version 0.4.1
+    e.g, download configuration generator of version 0.4.6
     ```bash
-    wget https://github.com/elespejo/bypass/releases/download/0.4.1/bypass-confgenerator-0.4.1.zip
+    wget https://github.com/elespejo/bypass/releases/download/0.4.6/bypass-confgenerator-0.4.6.zip
     ```
 
 ### Unzip
@@ -21,7 +21,7 @@ unzip bypass-confgenerator-[VERSION].zip
 ```
 e.g,
 ```bash
-unzip bypass-confgenerator-0.4.1.zip
+unzip bypass-confgenerator-0.4.6.zip
 ```
 
 ### Create bypass conf-info
@@ -78,8 +78,8 @@ e.g,
 ```bash
 tree ~/bypass-conf
 bypass-conf
-├── bypass-config.env
-└── bypass_conf
+├── config.env
+└── conf
     ├── 01-inner
     ├── 02-cn
     ├── 03-vps
@@ -88,11 +88,11 @@ bypass-conf
 ```
 
 Explanation of each file in bypass-conf
-* `bypass-config.env`: define enviroment variable for docker compose file 
-* `bypass_conf/01-inner`: default white list of cn
-* `bypass_conf/02-cn` default white list for local network
-* `bypass_conf/03-vps`: user defined white list, usually it contains the IP of vps 
-* `bypass_conf/04-test`: user defined white list 
+* `config.env`: define enviroment variable for docker compose file 
+* `conf/01-inner`: default white list of cn
+* `conf/02-cn` default white list for local network
+* `conf/03-vps`: user defined white list, usually it contains the IP of vps 
+* `conf/04-test`: user defined white list 
 
 
 
