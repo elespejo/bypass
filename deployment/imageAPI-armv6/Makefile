@@ -5,8 +5,8 @@ ENV=$(CURDIR)/.env
 .PHONY: config
 config:
 	cp $(ENV_TEMP) $(ENV)
-	cat $(CONFIG)/bypass-config.env >> $(ENV)
-	echo "CONFIG_DIR=$(CONFIG)/bypass_conf" >> $(ENV)
+	cat $(CONFIG)/config.env >> $(ENV)
+	echo "CONFIG_DIR=$(CONFIG)/conf" >> $(ENV)
 	cat $(ENV)
 	mkdir -p $(COMP_DIR)
 	docker-compose -p $(NAME) -f $(CURDIR)/docker-compose.yml config | tee $(COMP_DIR)/$(NAME).yml
