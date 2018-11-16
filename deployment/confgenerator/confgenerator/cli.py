@@ -3,7 +3,7 @@ import os
 import yaml
 from shutil import copy
 import argparse
-import bypass_confgenerator.generator as gen
+import confgenerator.generator as gen
 
 # sys.tracebacklimit = 0 # no traceback
 PKG_DIR = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
