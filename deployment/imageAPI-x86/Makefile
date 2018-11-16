@@ -6,7 +6,7 @@ ENV=$(CURDIR)/.env
 config:
 	cp $(ENV_TEMP) $(ENV)
 	cat $(CONFIG)/config.env >> $(ENV)
-	echo "CONFIG_DIR=$(CONFIG)/conf" >> $(ENV)
+	echo -e "\nCONFIG_DIR=$(CONFIG)/conf" >> $(ENV)
 	cat $(ENV)
 	mkdir -p $(COMP_DIR)
 	docker-compose -p $(NAME) -f $(CURDIR)/docker-compose.yml config | tee $(COMP_DIR)/$(NAME).yml
@@ -27,7 +27,7 @@ restart: $(COMP_DIR)/$(NAME).yml
 .PHONY: status
 status: $(COMP_DIR)/$(NAME).yml
 	docker-compose -p $(NAME) -f $(COMP_DIR)/$(NAME).yml ps
-	docker-compose -p $(NAME) -f $(COMP_DIR)/$(NAME).yml logs
+	docker-compose -p $(NAME) -f $(COMP_DIR)/$(NAME).yml logs || true
 
 .PHONY: list
 list: $(COMP_DIR)
