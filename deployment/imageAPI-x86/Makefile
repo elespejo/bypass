@@ -6,7 +6,7 @@ ENV=$(CURDIR)/.env
 config:
 	cp $(ENV_TEMP) $(ENV)
 	cat $(CONFIG)/config.env >> $(ENV)
-	echo -e "\nCONFIG_DIR=$(CONFIG)/conf" >> $(ENV)
+	echo "\nCONFIG_DIR=$(CONFIG)/conf" >> $(ENV)
 	cat $(ENV)
 	mkdir -p $(COMP_DIR)
 	docker-compose -p $(NAME) -f $(CURDIR)/docker-compose.yml config | tee $(COMP_DIR)/$(NAME).yml
