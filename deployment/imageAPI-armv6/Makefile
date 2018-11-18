@@ -18,6 +18,8 @@ start: $(COMP_DIR)/$(NAME).yml
 
 .PHONY: stop
 stop: $(COMP_DIR)/$(NAME).yml
+	docker-compose -p $(NAME) -f $(COMP_DIR)/$(NAME).yml exec router_bypass ./clean-rule
+	docker-compose -p $(NAME) -f $(COMP_DIR)/$(NAME).yml exec router_bypass ./clean-ipset
 	docker-compose -p $(NAME) -f $(COMP_DIR)/$(NAME).yml down
 
 .PHONY: restart
