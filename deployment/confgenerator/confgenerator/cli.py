@@ -18,7 +18,7 @@ class bypass_confgen_cli():
         self.gen = generator
         self._parse_arg()
         args = vars(self.parser.parse_args())
-        info = args['conf-info']
+        info = args['info']
         self.path = args['path']
         self._load_info(info)
         self.info_config = self.info_dict['config']
@@ -29,7 +29,7 @@ class bypass_confgen_cli():
         Return: the parser of the cli.
         """
         parser = argparse.ArgumentParser(description='Generate bypass configuration.')
-        parser.add_argument('conf-info')
+        parser.add_argument('-f', dest='info')
         parser.add_argument('-d', '--destination', dest='path', default=PKG_DIR+'/bypass')
 
         self.parser = parser
