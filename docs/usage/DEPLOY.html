@@ -57,6 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="../CHANGELOG.html" />
+    
     
     <link rel="prev" href="GENCONF.html" />
     
@@ -168,6 +170,26 @@
     
 
     
+        
+        <li class="header">Other</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../CHANGELOG.html">
+            
+                <a href="../CHANGELOG.html">
+            
+                    
+                    Change log
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
 
     <li class="divider"></li>
 
@@ -224,22 +246,22 @@
 <li>VERSION : the release tag  </li>
 <li>ARCH : the architecture of your machine </li>
 </ul>
-<p>e.g : Deploy a bypass on a x86 machine with the release 0.4.6 by executing</p>
-<pre><code class="lang-bash">wget https://github.com/elespejo/bypass/releases/download/0.4.6/bypass-imageAPI-x86-0.4.6.zip
+<p>e.g : Deploy a bypass on a x86 machine with the release 0.5.1 by executing</p>
+<pre><code class="lang-bash">wget https://github.com/elespejo/bypass/releases/download/0.5.1/bypass-imageAPI-x86-0.5.1.zip
 </code></pre>
 </li>
 </ul>
 <h3 id="unzip">Unzip</h3>
 <pre><code class="lang-bash">unzip bypass-imageAPI-[ARCH]-[VERSION].zip
-<span class="hljs-built_in">cd</span> bypass-imageAPI-[ARCH]
+<span class="hljs-built_in">cd</span> bypass-imageAPI-[ARCH]/
 </code></pre>
 <h3 id="generate-the-docker-compose-file">Generate the docker compose file</h3>
 <p>Docker compose file is used for bypass deployment. Its generation requires two parameters:</p>
 <ul>
-<li>[CONF_PATH]: The absolute path to configuration directory.  </li>
-<li>[COMP_NAME]: The name of docker compose file you are going to be generated.</li>
+<li>[CONFIG]: The absolute path to configuration directory.  </li>
+<li>[NAME]: The name of docker compose file you are going to be generated.</li>
 </ul>
-<pre><code class="lang-bash">make config CONFIG=[CONF_PATH] NAME=[COMP_NAME]
+<pre><code class="lang-bash">make config CONFIG=[CONF_PATH] NAME=[NAME]
 </code></pre>
 <p>e.g : Generate a compose file named <code>bypass.yml</code> with the configuration in <code>~/bypass-conf/</code>.</p>
 <pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/bypass-imageAPI-x86/
@@ -255,7 +277,7 @@ make config CONFIG=~/bypass-conf/ NAME=bypass
 <span class="hljs-attr">      BALANCE_NUM:</span> <span class="hljs-string">&apos;16&apos;</span>
 <span class="hljs-attr">      BASE_PORT:</span> <span class="hljs-string">&apos;2010&apos;</span>
 <span class="hljs-attr">      LAN:</span> br0
-<span class="hljs-attr">    image:</span> elespejo/bypass-x86:<span class="hljs-number">0.4</span><span class="hljs-number">.6</span>
+<span class="hljs-attr">    image:</span> elespejo/bypass-x86:<span class="hljs-number">0.5</span><span class="hljs-number">.1</span>
 <span class="hljs-attr">    network_mode:</span> host
 <span class="hljs-attr">    restart:</span> always
 <span class="hljs-attr">    stdin_open:</span> <span class="hljs-literal">true</span>
@@ -267,21 +289,20 @@ make config CONFIG=~/bypass-conf/ NAME=bypass
 </code></pre>
 <h3 id="start-the-service">Start the service</h3>
 <p>Start the service with the name you specified in the config step above.</p>
-<pre><code class="lang-bash">make start NAME=[COMP_NAME]
+<pre><code class="lang-bash">make start NAME=[NAME]
 </code></pre>
 <p>e.g: start service <code>bypass</code></p>
-<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> bypass-imageAPI-x86/
-make start NAME=bypass
+<pre><code class="lang-bash">make start NAME=bypass
 </code></pre>
 <p>After starting the service successfully, you may see the output similar with the following: </p>
 <pre><code>docker-compose -p bypass -f ~/bypass-imageAPI-x86/compose/bypass.yml up -d
-Pulling router_bypass (elespejo/bypass-x86:0.4.6)...
-0.4.6: Pulling from elespejo/bypass-x86
+Pulling router_bypass (elespejo/bypass-x86:0.5.1)...
+0.5.1: Pulling from elespejo/bypass-x86
 ...
-Status: Downloaded newer image for elespejo/bypass-x86:0.4.6
+Status: Downloaded newer image for elespejo/bypass-x86:0.5.1
 Creating bypass_router_bypass_1 ... done
 </code></pre><h3 id="restart-the-service">Restart the service</h3>
-<pre><code class="lang-bash">make restart NAME=[COMP_NAME]
+<pre><code class="lang-bash">make restart NAME=[NAME]
 </code></pre>
 <p>e.g</p>
 <pre><code class="lang-bash">make restart NAME=bypass
@@ -290,7 +311,7 @@ Creating bypass_router_bypass_1 ... done
 <pre><code>docker-compose -p bypass -f ~/bypass-imageAPI-x86/compose/bypass.yml up -d --force-recreate
 Recreating bypass_router_bypass_1 ... done
 </code></pre><h3 id="check-status-of-the-service">Check status of the service</h3>
-<pre><code class="lang-bash">make status NAME=[COMP_NAME]
+<pre><code class="lang-bash">make status NAME=[NAME]
 </code></pre>
 <p>e.g,</p>
 <pre><code class="lang-bash">make status NAME=bypass
@@ -304,7 +325,7 @@ docker-compose -p bypass -f ~/bypass-imageAPI-x86/compose/bypass.yml logs
 Attaching to bypass_router_bypass_1
 ...
 </code></pre><h3 id="stop-the-service">Stop the service</h3>
-<pre><code class="lang-bash">make stop NAME=[COMP_NAME]
+<pre><code class="lang-bash">make stop NAME=[NAME]
 </code></pre>
 <p>e.g,</p>
 <pre><code class="lang-bash">make stop NAME=bypass
@@ -323,7 +344,7 @@ Name   Command   State   Ports
 ------------------------------
 ...
 </code></pre><h3 id="remove-the-compose-file">Remove the compose file</h3>
-<pre><code class="lang-bash">make remove NAME=[COMP_NAME]
+<pre><code class="lang-bash">make remove NAME=[NAME]
 </code></pre>
 <p>e.g,</p>
 <pre><code class="lang-bash">make remove NAME=bypass
@@ -360,10 +381,14 @@ Name   Command   State   Ports
 
             
                 
-                <a href="GENCONF.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Generate configuration">
+                <a href="GENCONF.html" class="navigation navigation-prev " aria-label="Previous page: Generate configuration">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="../CHANGELOG.html" class="navigation navigation-next " aria-label="Next page: Change log">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -372,7 +397,7 @@ Name   Command   State   Ports
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Deployment","level":"3.2","depth":1,"previous":{"title":"Generate configuration","level":"3.1","depth":1,"path":"usage/GENCONF.md","ref":"usage/GENCONF.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"usage/DEPLOY.md","mtime":"2018-11-16T08:49:42.144Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-16T08:49:49.302Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Deployment","level":"3.2","depth":1,"next":{"title":"Change log","level":"4.1","depth":1,"path":"CHANGELOG.md","ref":"CHANGELOG.md","articles":[]},"previous":{"title":"Generate configuration","level":"3.1","depth":1,"path":"usage/GENCONF.md","ref":"usage/GENCONF.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"usage/DEPLOY.md","mtime":"2018-11-19T03:07:30.683Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-19T03:27:51.999Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

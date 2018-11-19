@@ -14,26 +14,26 @@ wget https://github.com/elespejo/bypass/releases/download/[VERSION]/bypass-image
   * VERSION : the release tag  
   * ARCH : the architecture of your machine 
 
-  e.g : Deploy a bypass on a x86 machine with the release 0.4.6 by executing
+  e.g : Deploy a bypass on a x86 machine with the release 0.5.1 by executing
   ```bash
-  wget https://github.com/elespejo/bypass/releases/download/0.4.6/bypass-imageAPI-x86-0.4.6.zip
+  wget https://github.com/elespejo/bypass/releases/download/0.5.1/bypass-imageAPI-x86-0.5.1.zip
   ```
 
 ### Unzip
 
 ```bash
 unzip bypass-imageAPI-[ARCH]-[VERSION].zip
-cd bypass-imageAPI-[ARCH]
+cd bypass-imageAPI-[ARCH]/
 ```
 
 ### Generate the docker compose file
 
 Docker compose file is used for bypass deployment. Its generation requires two parameters:
-* [CONF_PATH]: The absolute path to configuration directory.  
-* [COMP_NAME]: The name of docker compose file you are going to be generated.
+* [CONFIG]: The absolute path to configuration directory.  
+* [NAME]: The name of docker compose file you are going to be generated.
 
 ```bash
-make config CONFIG=[CONF_PATH] NAME=[COMP_NAME]
+make config CONFIG=[CONF_PATH] NAME=[NAME]
 ```
 
 e.g : Generate a compose file named `bypass.yml` with the configuration in `~/bypass-conf/`.
@@ -52,7 +52,7 @@ services:
       BALANCE_NUM: '16'
       BASE_PORT: '2010'
       LAN: br0
-    image: elespejo/bypass-x86:0.4.6
+    image: elespejo/bypass-x86:0.5.1
     network_mode: host
     restart: always
     stdin_open: true
@@ -66,26 +66,25 @@ version: '3.2'
 ### Start the service
 Start the service with the name you specified in the config step above.
 ```bash 
-make start NAME=[COMP_NAME]
+make start NAME=[NAME]
 ```
 e.g: start service `bypass`
 ```bash
-cd bypass-imageAPI-x86/
 make start NAME=bypass
 ```
 After starting the service successfully, you may see the output similar with the following: 
 ```
 docker-compose -p bypass -f ~/bypass-imageAPI-x86/compose/bypass.yml up -d
-Pulling router_bypass (elespejo/bypass-x86:0.4.6)...
-0.4.6: Pulling from elespejo/bypass-x86
+Pulling router_bypass (elespejo/bypass-x86:0.5.1)...
+0.5.1: Pulling from elespejo/bypass-x86
 ...
-Status: Downloaded newer image for elespejo/bypass-x86:0.4.6
+Status: Downloaded newer image for elespejo/bypass-x86:0.5.1
 Creating bypass_router_bypass_1 ... done
 ```
 
 ### Restart the service
 ```bash
-make restart NAME=[COMP_NAME]
+make restart NAME=[NAME]
 ```
 e.g
 ```bash
@@ -99,7 +98,7 @@ Recreating bypass_router_bypass_1 ... done
 
 ### Check status of the service
 ```bash
-make status NAME=[COMP_NAME]
+make status NAME=[NAME]
 ```
 e.g,
 ```bash
@@ -118,7 +117,7 @@ Attaching to bypass_router_bypass_1
 
 ### Stop the service
 ```bash
-make stop NAME=[COMP_NAME]
+make stop NAME=[NAME]
 ```
 e.g,
 ```bash
@@ -146,7 +145,7 @@ Name   Command   State   Ports
 
 ### Remove the compose file
 ```bash
-make remove NAME=[COMP_NAME]
+make remove NAME=[NAME]
 ```
 e.g,
 ```bash

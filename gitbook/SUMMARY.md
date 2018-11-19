@@ -10,3 +10,5 @@
 * [Generate configuration](usage/GENCONF.md)
 * [Deployment](usage/DEPLOY.md)
 
+### Other
+* [Change log](CHANGELOG.md)
