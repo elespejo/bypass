@@ -3,7 +3,10 @@
 ### Update imageAPI:
 1. add target 'test_config' to check the compose file
 2. show the iptables rule when checking status
-3. check if the compose exists when remove
+3. add target 'test_start'
+4. add target 'test_restart'
+5. add target 'test_stop'
+6. add target 'test_remove'
 
 ### Update gitbook:
 1. update change log
