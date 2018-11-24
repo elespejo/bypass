@@ -26,6 +26,9 @@ stop: $(COMP_DIR)/$(NAME).yml
 	docker-compose -p $(NAME) -f $(COMP_DIR)/$(NAME).yml exec router_bypass ./clean-ipset
 	docker-compose -p $(NAME) -f $(COMP_DIR)/$(NAME).yml down
 
+.PHONY: test_stop
+test_stop: status
+
 .PHONY: restart
 restart: $(COMP_DIR)/$(NAME).yml
 	docker-compose -p $(NAME) -f $(COMP_DIR)/$(NAME).yml up -d --force-recreate
@@ -44,4 +47,7 @@ list: $(COMP_DIR)
 .PHONY: remove
 remove: $(COMP_DIR)/$(NAME).yml
 	rm $(COMP_DIR)/$(NAME).yml
-	ls $(COMP_DIR) | grep $(NAME)
+
+.PHONY: test_remove
+test_remove:
+	((test -e $(COMP_DIR)/$(NAME).yml) && echo "$(NAME).yml exists") || (echo "$(NAME).yml does NOT exists")
