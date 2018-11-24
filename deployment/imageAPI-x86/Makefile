@@ -29,9 +29,12 @@ stop: $(COMP_DIR)/$(NAME).yml
 test_stop: status
 
 
-.PHONY: restart
+.PHONY: restart test_restart
 restart: $(COMP_DIR)/$(NAME).yml
 	docker-compose -p $(NAME) -f $(COMP_DIR)/$(NAME).yml up -d --force-recreate
+
+test_restart: status
+
 
 .PHONY: status
 status: $(COMP_DIR)/$(NAME).yml
