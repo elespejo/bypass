@@ -10,5 +10,8 @@
 * [Generate configuration](usage/GENCONF.md)
 * [Deployment](usage/DEPLOY.md)
 
+### For developer
+* [work flow](develop/WORKFLOW.md)
+
 ### Other
 * [Change log](CHANGELOG.md)

@@ -1,3 +1,18 @@
+# 0.5.2: Add test interface
+
+### Update imageAPI:
+1. add target 'test_config' to check the compose file
+2. show the iptables rule when checking status
+3. check if the compose exists when remove
+
+### Update gitbook:
+1. update change log
+2. add target 'test_config' in deployment doc
+3. update dependency doc
+4. add work flow doc for developer
+
+
+
 # 0.5.1: Update confgenerator
 
 ### Update confgenerator:

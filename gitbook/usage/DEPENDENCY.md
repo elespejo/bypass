@@ -9,10 +9,10 @@
 3. Install python3
     ```bash
     apt install python3
-    apt install python-pip
+    apt install python3-pip
     ```
 
 4. Install python module `pyyaml`
     ```bash
-    pip install pyyaml
+    pip3 install pyyaml
     ```
