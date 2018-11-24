@@ -10,9 +10,9 @@ You can download the generator package from web page or command line.
     ```bash
     wget https://github.com/elespejo/bypass/releases/download/[VERSION]/bypass-confgenerator-[VERSION].zip
     ```
-    e.g, download configuration generator of version 0.5.1
+    e.g, download configuration generator of version 0.5.5
     ```bash
-    wget https://github.com/elespejo/bypass/releases/download/0.5.1/bypass-confgenerator-0.5.1.zip
+    wget https://github.com/elespejo/bypass/releases/download/0.5.5/bypass-confgenerator-0.5.5.zip
     ```
 
 ### Unzip
@@ -22,7 +22,7 @@ cd bypass-confgenerator/
 ```
 e.g,
 ```bash
-unzip bypass-confgenerator-0.5.1.zip
+unzip bypass-confgenerator-0.5.5.zip
 cd bypass-confgenerator/
 ```
 

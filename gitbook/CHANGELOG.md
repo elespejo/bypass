@@ -1,4 +1,4 @@
-# 0.5.2: Add test interface
+# 0.5.5: Add test interface
 
 ### Update imageAPI:
 1. add target 'test_config' to check the compose file

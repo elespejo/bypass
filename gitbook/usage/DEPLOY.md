@@ -14,9 +14,9 @@ wget https://github.com/elespejo/bypass/releases/download/[VERSION]/bypass-image
   * VERSION : the release tag  
   * ARCH : the architecture of your machine 
 
-  e.g : Deploy a bypass on a x86 machine with the release 0.5.1 by executing
+  e.g : Deploy a bypass on a x86 machine with the release 0.5.5 by executing
   ```bash
-  wget https://github.com/elespejo/bypass/releases/download/0.5.1/bypass-imageAPI-x86-0.5.1.zip
+  wget https://github.com/elespejo/bypass/releases/download/0.5.5/bypass-imageAPI-x86-0.5.5.zip
   ```
 
 ### Unzip
@@ -52,7 +52,7 @@ services:
       BALANCE_NUM: '16'
       BASE_PORT: '2010'
       LAN: br0
-    image: elespejo/bypass-x86:0.5.1
+    image: elespejo/bypass-x86:0.5.5
     network_mode: host
     restart: always
     stdin_open: true
@@ -79,10 +79,10 @@ make start NAME=bypass
 After starting the service successfully, you may see the output similar with the following: 
 ```
 docker-compose -p bypass -f ~/bypass-imageAPI-x86/compose/bypass.yml up -d
-Pulling router_bypass (elespejo/bypass-x86:0.5.1)...
-0.5.1: Pulling from elespejo/bypass-x86
+Pulling router_bypass (elespejo/bypass-x86:0.5.5)...
+0.5.5: Pulling from elespejo/bypass-x86
 ...
-Status: Downloaded newer image for elespejo/bypass-x86:0.5.1
+Status: Downloaded newer image for elespejo/bypass-x86:0.5.5
 Creating bypass_router_bypass_1 ... done
 ```
 
