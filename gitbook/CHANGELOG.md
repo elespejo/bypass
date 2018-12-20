@@ -4,7 +4,7 @@
 1. update info format
 2. update conf generator
 
-# Update gitbook:
+### Update gitbook:
 1. update version
 2. update GENCONF
 3. update changelog
