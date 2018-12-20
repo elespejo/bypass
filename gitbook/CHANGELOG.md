@@ -1,3 +1,15 @@
+# 0.5.6: Update info format
+
+### Update confgenerator:
+1. update info format
+2. update conf generator
+
+# Update gitbook:
+1. update version
+2. update GENCONF
+3. update changelog
+
+
 # 0.5.5: Add test interface
 
 ### Update imageAPI:
