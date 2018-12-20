@@ -22,7 +22,8 @@ class bypass_confgen_cli():
         self.path = args['path']
         self._load_info(info)
         self.info_config = self.info_dict['config']
-        self.info_white = self.info_dict['white']
+        self.info_vps = self.info_dict['bypass-vps']
+        self.info_dir = self.info_dict['whitelist-dir']
 
     def _parse_arg(self):
         """Define the cli.
@@ -52,11 +53,19 @@ class bypass_confgen_cli():
         os.makedirs(white_dir)
         copy(PKG_DIR+'/confgenerator/01-inner', white_dir)
         copy(PKG_DIR+'/confgenerator/02-cn', white_dir)
-        for file in self.info_white:
-            f = open(white_dir+'/'+file['filename'], 'w')
-            for content in file['content']:
-                f.write(content+'\n')
-            f.close
+        
+        # generate vps
+        f = open(white_dir+'/vps', 'w')
+        for content in self.info_vps:
+            f.write(content+'\n')
+        f.close
+
+        # copy file in white list directory
+        files = os.listdir(self.info_dir)
+        for file in files:
+            full_file_name = os.path.join(self.info_dir, file)
+            if (os.path.isfile(full_file_name)):
+                copy(full_file_name, white_dir)
 
     def generate(self):
         """Generate the bypass configuration."""
