@@ -7,4 +7,4 @@ bypass-vps:
   - ip/net
   - ip/net
 
-whitelist-dir:  /home/develop/Pan/elespejo/bypass/deployment/confgenerator/testconf
+whitelist-dir:  /home/USER/white-dir
