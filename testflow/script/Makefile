@@ -46,3 +46,10 @@ testflow_status:
 	make -s -f basic.mk hint CONTENT="make status"
 	make -C ${IMG_PKG} status NAME=bypass
 	make -s -f basic.mk confirm
+testflow_testsettings:
+	make -s -f test_settings.mk inner 
+	make -s -f test_settings.mk vps 
+	make -s -f test_settings.mk cn 
+	make -s -f test_settings.mk newchina
+	make -s -f test_settings.mk other
+ 

@@ -19,7 +19,6 @@ make -f manage_dev.mk gen_proj_conf
 
 * Run test cases
 
-	**Please run `sudo systemctl disable systemd-resolved.service` if ubuntu 18.04 is used for testing**
 ```
 make -f dev.mk test_install
 make -f dev.mk test_reinstall
