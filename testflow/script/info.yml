@@ -1,0 +1,10 @@
+config:
+  lan: br0
+  base_port: 2010
+  number: 4
+
+bypass-vps:
+  - ip/net
+  - ip/net
+
+whitelist-dir:  /home/qa/github/bypass/testflow/script/white-dir
