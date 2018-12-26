@@ -28,11 +28,6 @@ make -f manage_prod.mk set_img_pkg
 make -f manage_prod.mk gen_proj_conf 
 ```
 
-* Download images
-```
-docker pull elespejo/bypass-x86:0.5.7
-```
-
 * Run test cases
 
 ```
