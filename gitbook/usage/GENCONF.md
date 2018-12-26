@@ -10,9 +10,9 @@ You can download the generator package from web page or command line.
     ```bash
     wget https://github.com/elespejo/bypass/releases/download/[VERSION]/bypass-confgenerator-[VERSION].zip
     ```
-    e.g, download configuration generator of version 0.5.5
+    e.g, download configuration generator of version 0.5.6
     ```bash
-    wget https://github.com/elespejo/bypass/releases/download/0.5.5/bypass-confgenerator-0.5.5.zip
+    wget https://github.com/elespejo/bypass/releases/download/0.5.6/bypass-confgenerator-0.5.6.zip
     ```
 
 ### Unzip
@@ -22,7 +22,7 @@ cd bypass-confgenerator/
 ```
 e.g,
 ```bash
-unzip bypass-confgenerator-0.5.5.zip
+unzip bypass-confgenerator-0.5.6.zip
 cd bypass-confgenerator/
 ```
 
@@ -36,27 +36,22 @@ vi bypass-info.yml
 The `bypass-info.yml` looks like following:
 ```yaml
 config:
-  lan: br0 
+  lan: br0
   base_port: 2010
   number: 16
   
-white:
-  - filename: 03-vps
-    content:
-    - ip/net
-    - ip/net
+bypass-vps:
+  - ip/net
+  - ip/net
 
-  - filename: 04-test
-    content:
-    - ip/net
-    - ip/net
+whitelist-dir:  /home/USER/white-dir
 ``` 
 Explanation of `bypass-info.yml`
 * [lan]: ethernet interface name for your machine's lan
 * [base_port]: first port used by bypass
 * [number]: number of ports
-* [filename]: filename of while list
-* [content]: ip/netmask in white list, e.g, `123.123.123.0/24` or `123.123.123.123/32`, there can be more than one ip/net list in content
+* [bypass-vps]: ip/netmask in white list, e.g, `123.123.123.0/24` or `123.123.123.123/32`, there can be more than one ip/net list
+* [whitelist-dir]: the path of extra configuration files
 
 ### Generate configuration
 
@@ -86,13 +81,13 @@ bypass-conf
 └── conf
     ├── 01-inner
     ├── 02-cn
-    ├── 03-vps
-    └── 04-test
+    ├── vps
+    └── extraconf
 ```
 
 Explanation of each file in bypass-conf
 * `config.env`: define environment variable for docker compose file 
 * `conf/01-inner`: default white list of cn
 * `conf/02-cn` default white list for local network
-* `conf/03-vps`: user defined white list, usually it contains the IP of vps 
-* `conf/04-test`: user defined white list 
+* `conf/vps`: user defined white list, usually it contains the IP of vps 
+* `conf/extraconf`: configuration in whitelist-dir
