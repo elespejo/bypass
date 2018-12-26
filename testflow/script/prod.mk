@@ -6,7 +6,6 @@ test_install:
 	make testflow_testsettings
 	make testflow_stop
 	make testflow_remove
-	make testflow_testsettings
 .PHONY: test_reinstall
 test_reinstall:
 	make -s -f basic.mk hint CONTENT="make reinstall"
@@ -17,7 +16,6 @@ test_reinstall:
 	make testflow_testsettings
 	make testflow_stop
 	make testflow_remove
-	make testflow_testsettings
 .PHONY: test_reuninstall
 test_reuninstall:
 	make -s -f basic.mk hint CONTENT="make reuninstall"
@@ -27,7 +25,6 @@ test_reuninstall:
 	make testflow_stop
 	make testflow_remove
 	make testflow_remove
-	make testflow_testsettings
 .PHONY: test_installafteruninstall
 test_installafteruninstall:
 	make -s -f basic.mk hint CONTENT="make installafteruninstall"
@@ -40,7 +37,6 @@ test_installafteruninstall:
 	make testflow_testsettings
 	make testflow_stop
 	make testflow_remove
-	make testflow_testsettings
 .PHONY: test_reboot_p1
 test_reboot_p1:
 	make -s -f basic.mk hint CONTENT="make reboot_p1"
@@ -67,4 +63,3 @@ test_poweroff_p2:
 	make testflow_testsettings
 	make testflow_stop
 	make testflow_remove
-	make testflow_testsettings
