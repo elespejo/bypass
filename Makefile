@@ -54,6 +54,15 @@ clean-deployment: $(REPO)-$(VERSION).zip
 	rm $(REPO)-$(VERSION).zip
 
 
+.PHONY: mk-testflow clean-testflow
+mk-testflow:
+	sed -i '/^export PROJ_VERSION/c\export PROJ_VERSION=$(VERSION)' testflow/script/.env
+	cat testflow/script/.env | grep PROJ_VERSION 
+	cd testflow && zip -r ../$(REPO)-testflow-$(VERSION).zip script
+
+clean-testflow:
+	rm $(REPO)-testflow*.zip
+
 .PHONY: pushtohub
 pushtohub:
 	docker tag $(OWNER)/$(REPO)-$(ARCH) $(OWNER)/$(REPO)-$(ARCH):$(TAG)
