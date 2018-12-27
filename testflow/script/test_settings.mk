@@ -27,7 +27,7 @@ cn:
 
 .PHONY: newchina
 newchina:
-	make -s -f basic.mk hint CONTENT="Please do 'tcpping -x 5 203.208.41.71' on pc behind"
+	make -s -f basic.mk hint CONTENT="Please do 'tcpping -x 5 34.196.85.9' on pc behind"
 	make -s -f basic.mk confirm
 	sudo iptables -L -nv -t nat | grep newchina
 	make -s -f basic.mk confirm
