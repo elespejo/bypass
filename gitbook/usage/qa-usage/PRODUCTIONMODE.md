@@ -3,8 +3,8 @@
 **Please install [routing](https://hilanderas.github.io/routing/usage/quickstart/INSTALL.html) before going on**
 ### Download testflow packages and unzip
 ```
-wget https://github.com/elespejo/bypass/releases/download/0.6.0/bypass-testflow-0.6.0.zip
-unzip dnsmasq-testflow-0.6.0.zip
+wget https://github.com/elespejo/bypass/releases/download/0.6.1/bypass-testflow-0.6.1.zip
+unzip dnsmasq-testflow-0.6.1.zip
 ```
 
 ### Run test cases on x86
