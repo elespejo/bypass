@@ -65,13 +65,9 @@ make -f manage_prod.mk set_img_pkg
 
 * Generate configuration 
 
-	Update a info.yml file in current directory
+	Update `br0` and path of whitelist-dir to current directory in info.yml before going on
 ```
 make -f manage_prod.mk gen_proj_conf 
-```
-* Download images
-```
-docker pull elespejo/dnsmasq-armv6:0.9.5
 ```
 
 * Run test cases
