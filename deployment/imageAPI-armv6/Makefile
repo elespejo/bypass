@@ -42,7 +42,7 @@ status: $(COMP_DIR)/$(NAME).yml
 	docker-compose -p $(NAME) -f $(COMP_DIR)/$(NAME).yml ps
 	docker-compose -p $(NAME) -f $(COMP_DIR)/$(NAME).yml logs || true
 	sudo iptables -t nat -S PREROUTING
-	sudo iptables -t nat -S BYPASS
+	sudo iptables -t nat -S BYPASS || true
 
 .PHONY: list
 list: $(COMP_DIR)

@@ -191,11 +191,44 @@
 
     
         
+        <li class="header">QA usage</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="qa-usage/DEVELOPMODE.html">
+            
+                <a href="qa-usage/DEVELOPMODE.html">
+            
+                    
+                    Development mode
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="qa-usage/PRODUCTIONMODE.html">
+            
+                <a href="qa-usage/PRODUCTIONMODE.html">
+            
+                    
+                    Production mode
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
         <li class="header">Other</li>
         
         
     
-        <li class="chapter " data-level="5.1" data-path="../CHANGELOG.html">
+        <li class="chapter " data-level="6.1" data-path="../CHANGELOG.html">
             
                 <a href="../CHANGELOG.html">
             
@@ -262,8 +295,8 @@
 <li><p>From command line:  </p>
 <pre><code class="lang-bash">  wget https://github.com/elespejo/bypass/releases/download/[VERSION]/bypass-confgenerator-[VERSION].zip
 </code></pre>
-<p>  e.g, download configuration generator of version 0.5.5</p>
-<pre><code class="lang-bash">  wget https://github.com/elespejo/bypass/releases/download/0.5.5/bypass-confgenerator-0.5.5.zip
+<p>  e.g, download configuration generator of version 0.5.6</p>
+<pre><code class="lang-bash">  wget https://github.com/elespejo/bypass/releases/download/0.5.6/bypass-confgenerator-0.5.6.zip
 </code></pre>
 </li>
 </ul>
@@ -272,7 +305,7 @@
 <span class="hljs-built_in">cd</span> bypass-confgenerator/
 </code></pre>
 <p>e.g,</p>
-<pre><code class="lang-bash">unzip bypass-confgenerator-0.5.5.zip
+<pre><code class="lang-bash">unzip bypass-confgenerator-0.5.6.zip
 <span class="hljs-built_in">cd</span> bypass-confgenerator/
 </code></pre>
 <h3 id="create-bypass-conf-info">Create bypass conf-info</h3>
@@ -282,28 +315,23 @@ vi bypass-info.yml
 </code></pre>
 <p>The <code>bypass-info.yml</code> looks like following:</p>
 <pre><code class="lang-yaml"><span class="hljs-attr">config:</span>
-<span class="hljs-attr">  lan:</span> br0 
+<span class="hljs-attr">  lan:</span> br0
 <span class="hljs-attr">  base_port:</span> <span class="hljs-number">2010</span>
-<span class="hljs-attr">  number:</span> <span class="hljs-number">16</span>
+<span class="hljs-attr">  number:</span> <span class="hljs-number">4</span>
 
-<span class="hljs-attr">white:</span>
-<span class="hljs-attr">  - filename:</span> <span class="hljs-number">03</span>-vps
-<span class="hljs-attr">    content:</span>
-<span class="hljs-bullet">    -</span> ip/net
-<span class="hljs-bullet">    -</span> ip/net
+<span class="hljs-attr">bypass-vps:</span>
+<span class="hljs-bullet">  -</span> ip/net
+<span class="hljs-bullet">  -</span> ip/net
 
-<span class="hljs-attr">  - filename:</span> <span class="hljs-number">04</span>-test
-<span class="hljs-attr">    content:</span>
-<span class="hljs-bullet">    -</span> ip/net
-<span class="hljs-bullet">    -</span> ip/net
+<span class="hljs-attr">whitelist-dir:</span>  /home/USER/white-dir
 </code></pre>
 <p>Explanation of <code>bypass-info.yml</code></p>
 <ul>
 <li>[lan]: ethernet interface name for your machine&apos;s lan</li>
 <li>[base_port]: first port used by bypass</li>
-<li>[number]: number of ports</li>
-<li>[filename]: filename of while list</li>
-<li>[content]: ip/netmask in white list, e.g, <code>123.123.123.0/24</code> or <code>123.123.123.123/32</code>, there can be more than one ip/net list in content</li>
+<li>[number]: number of ports (<strong>As info template above, 4 ports will be configured as 2010, 2020, 2030, 2040.</strong>)</li>
+<li>[bypass-vps]: ip/netmask in white list, e.g, <code>123.123.123.0/24</code> or <code>123.123.123.123/32</code>, there can be more than one ip/net list</li>
+<li>[whitelist-dir]: the path of extra configuration files</li>
 </ul>
 <h3 id="generate-configuration">Generate configuration</h3>
 <ul>
@@ -329,16 +357,16 @@ bypass-conf
 &#x2514;&#x2500;&#x2500; conf
     &#x251C;&#x2500;&#x2500; 01-inner
     &#x251C;&#x2500;&#x2500; 02-cn
-    &#x251C;&#x2500;&#x2500; 03-vps
-    &#x2514;&#x2500;&#x2500; 04-test
+    &#x251C;&#x2500;&#x2500; vps
+    &#x2514;&#x2500;&#x2500; extraconf
 </code></pre>
 <p>Explanation of each file in bypass-conf</p>
 <ul>
 <li><code>config.env</code>: define environment variable for docker compose file </li>
 <li><code>conf/01-inner</code>: default white list of cn</li>
 <li><code>conf/02-cn</code> default white list for local network</li>
-<li><code>conf/03-vps</code>: user defined white list, usually it contains the IP of vps </li>
-<li><code>conf/04-test</code>: user defined white list </li>
+<li><code>conf/vps</code>: user defined white list, usually it contains the IP of vps </li>
+<li><code>conf/extraconf</code>: configuration in whitelist-dir</li>
 </ul>
 
                                 
@@ -383,7 +411,7 @@ bypass-conf
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Generate configuration","level":"3.1","depth":1,"next":{"title":"Deployment","level":"3.2","depth":1,"path":"usage/DEPLOY.md","ref":"usage/DEPLOY.md","articles":[]},"previous":{"title":"Dependency","level":"2.2","depth":1,"path":"usage/DEPENDENCY.md","ref":"usage/DEPENDENCY.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"usage/GENCONF.md","mtime":"2018-11-24T10:36:39.549Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-24T10:36:56.324Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Generate configuration","level":"3.1","depth":1,"next":{"title":"Deployment","level":"3.2","depth":1,"path":"usage/DEPLOY.md","ref":"usage/DEPLOY.md","articles":[]},"previous":{"title":"Dependency","level":"2.2","depth":1,"path":"usage/DEPENDENCY.md","ref":"usage/DEPENDENCY.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"usage/GENCONF.md","mtime":"2018-12-28T02:27:19.813Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-12-28T02:27:31.849Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

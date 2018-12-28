@@ -191,11 +191,44 @@
 
     
         
+        <li class="header">QA usage</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="qa-usage/DEVELOPMODE.html">
+            
+                <a href="qa-usage/DEVELOPMODE.html">
+            
+                    
+                    Development mode
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="qa-usage/PRODUCTIONMODE.html">
+            
+                <a href="qa-usage/PRODUCTIONMODE.html">
+            
+                    
+                    Production mode
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
         <li class="header">Other</li>
         
         
     
-        <li class="chapter " data-level="5.1" data-path="../CHANGELOG.html">
+        <li class="chapter " data-level="6.1" data-path="../CHANGELOG.html">
             
                 <a href="../CHANGELOG.html">
             
@@ -266,8 +299,8 @@
 <li>VERSION : the release tag  </li>
 <li>ARCH : the architecture of your machine </li>
 </ul>
-<p>e.g : Deploy a bypass on a x86 machine with the release 0.5.5 by executing</p>
-<pre><code class="lang-bash">wget https://github.com/elespejo/bypass/releases/download/0.5.5/bypass-imageAPI-x86-0.5.5.zip
+<p>e.g : Deploy a bypass on a x86 machine with the release 0.5.6 by executing</p>
+<pre><code class="lang-bash">wget https://github.com/elespejo/bypass/releases/download/0.5.6/bypass-imageAPI-x86-0.5.6.zip
 </code></pre>
 </li>
 </ul>
@@ -297,7 +330,7 @@ make config CONFIG=~/bypass-conf/ NAME=bypass
 <span class="hljs-attr">      BALANCE_NUM:</span> <span class="hljs-string">&apos;16&apos;</span>
 <span class="hljs-attr">      BASE_PORT:</span> <span class="hljs-string">&apos;2010&apos;</span>
 <span class="hljs-attr">      LAN:</span> br0
-<span class="hljs-attr">    image:</span> elespejo/bypass-x86:<span class="hljs-number">0.5</span><span class="hljs-number">.5</span>
+<span class="hljs-attr">    image:</span> elespejo/bypass-x86:<span class="hljs-number">0.5</span><span class="hljs-number">.6</span>
 <span class="hljs-attr">    network_mode:</span> host
 <span class="hljs-attr">    restart:</span> always
 <span class="hljs-attr">    stdin_open:</span> <span class="hljs-literal">true</span>
@@ -319,10 +352,10 @@ make config CONFIG=~/bypass-conf/ NAME=bypass
 </code></pre>
 <p>After starting the service successfully, you may see the output similar with the following: </p>
 <pre><code>docker-compose -p bypass -f ~/bypass-imageAPI-x86/compose/bypass.yml up -d
-Pulling router_bypass (elespejo/bypass-x86:0.5.5)...
-0.5.5: Pulling from elespejo/bypass-x86
+Pulling router_bypass (elespejo/bypass-x86:0.5.6)...
+0.5.6: Pulling from elespejo/bypass-x86
 ...
-Status: Downloaded newer image for elespejo/bypass-x86:0.5.5
+Status: Downloaded newer image for elespejo/bypass-x86:0.5.6
 Creating bypass_router_bypass_1 ... done
 </code></pre><h3 id="restart-the-service">Restart the service</h3>
 <pre><code class="lang-bash">make restart NAME=[NAME]
@@ -420,7 +453,7 @@ Name   Command   State   Ports
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Deployment","level":"3.2","depth":1,"next":{"title":"work flow","level":"4.1","depth":1,"path":"develop/WORKFLOW.md","ref":"develop/WORKFLOW.md","articles":[]},"previous":{"title":"Generate configuration","level":"3.1","depth":1,"path":"usage/GENCONF.md","ref":"usage/GENCONF.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"usage/DEPLOY.md","mtime":"2018-11-24T10:36:38.009Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-24T10:36:56.324Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Deployment","level":"3.2","depth":1,"next":{"title":"work flow","level":"4.1","depth":1,"path":"develop/WORKFLOW.md","ref":"develop/WORKFLOW.md","articles":[]},"previous":{"title":"Generate configuration","level":"3.1","depth":1,"path":"usage/GENCONF.md","ref":"usage/GENCONF.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"usage/DEPLOY.md","mtime":"2018-12-27T07:01:01.267Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-12-28T02:27:31.849Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

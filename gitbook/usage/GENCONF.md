@@ -38,7 +38,7 @@ The `bypass-info.yml` looks like following:
 config:
   lan: br0
   base_port: 2010
-  number: 16
+  number: 4
   
 bypass-vps:
   - ip/net
@@ -49,9 +49,11 @@ whitelist-dir:  /home/USER/white-dir
 Explanation of `bypass-info.yml`
 * [lan]: ethernet interface name for your machine's lan
 * [base_port]: first port used by bypass
-* [number]: number of ports
+* [number]: number of ports (**As info template above, 4 ports will be configured as 2010, 2020, 2030, 2040.**)
 * [bypass-vps]: ip/netmask in white list, e.g, `123.123.123.0/24` or `123.123.123.123/32`, there can be more than one ip/net list
 * [whitelist-dir]: the path of extra configuration files
+
+    
 
 ### Generate configuration
 

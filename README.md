@@ -13,7 +13,7 @@
 x86: [![Docker Pulls](https://img.shields.io/docker/pulls/elespejo/bypass-x86.svg)](https://hub.docker.com/r/elespejo/bypass-x86/tags/)
 armv6: [![Docker Pulls](https://img.shields.io/docker/pulls/elespejo/bypass-x86.svg)](https://hub.docker.com/r/elespejo/bypass-armv6/tags/)
 
-![Travis (.org) branch](https://img.shields.io/travis/elespejo/bypass/BRANCH.svg)
+![Travis (.org) branch](https://img.shields.io/travis/elespejo/bypass.svg)
 ![GitHub](https://img.shields.io/github/license/elespejo/bypass.svg)
 
 # Manual

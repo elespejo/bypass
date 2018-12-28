@@ -13,5 +13,9 @@
 ### For developer
 * [work flow](develop/WORKFLOW.md)
 
+### QA usage
+* [Development mode](usage/qa-usage/DEVELOPMODE.md)
+* [Production mode](usage/qa-usage/PRODUCTIONMODE.md)
+
 ### Other
 * [Change log](CHANGELOG.md)
